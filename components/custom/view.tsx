@@ -58,14 +58,13 @@ const View = ({ submitOK, outputSubdir }: ViewProps) => {
     <div className="min-h-screen w-full px-4 pb-4">
       <Card className="w-full">
         <CardHeader>
-          <CardTitle>Result</CardTitle>
+          <CardTitle>Generated Images</CardTitle>
         </CardHeader>
         <CardContent>
           {submitOK !== null && (
             <div>
               {submitOK ? (
                 <>
-                  <p className="mb-4 text-sm text-green-600">Submission successful!</p>
                   {loading && <p className="text-sm text-muted-foreground">Loading images...</p>}
                   {error && <p className="text-sm text-red-600">{error}</p>}
                   {!loading && !error && subfolders.length > 0 && (
@@ -114,9 +113,7 @@ const View = ({ submitOK, outputSubdir }: ViewProps) => {
                     <p className="text-sm text-muted-foreground">No subfolders found.</p>
                   )}
                 </>
-              ) : (
-                <p className="text-sm text-red-600">Submission failed.</p>
-              )}
+              ) : null}
             </div>
           )}
           {submitOK === null && (

@@ -112,9 +112,9 @@ export default function Home() {
     <div className="w-full px-4 pt-4">
       <Card className="w-full">
         <CardHeader>
-          <CardTitle>Data Generation</CardTitle>
+          <CardTitle>Synthetic Data Generation</CardTitle>
           <CardDescription>
-            Generate realistic and diverse data for your applications with ease.
+            Generate Synthetic Data for Your Application with ease
           </CardDescription>
         </CardHeader>
       <CardContent>
@@ -191,7 +191,7 @@ export default function Home() {
             Reset
           </Button>
           <Button type="submit" form="form-rhf-demo">
-            Submit
+            Generate
           </Button>
         </Field>
       </CardFooter>

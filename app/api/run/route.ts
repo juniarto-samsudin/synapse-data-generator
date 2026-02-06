@@ -60,7 +60,7 @@ export async function POST(req: Request) {
     console.log(`ipc: ${ipc}`);
     console.log(`RUNS_DIR: ${RUNS_DIR}`);
 
-    fs.mkdirSync(outdir, { recursive: true });
+    //fs.mkdirSync(outdir, { recursive: true });
 
     // IMPORTANT: use conda run when an env is specified; fallback to PYTHON_BIN
     const condaBin = process.env.CONDA_BIN || "conda";
