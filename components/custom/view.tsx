@@ -73,7 +73,7 @@ const View = ({ submitOK, outputSubdir }: ViewProps) => {
                       <table className="w-full border-collapse">
                         <thead>
                           <tr className="border-b">
-                            <th className="p-2 text-left font-semibold">Subfolder</th>
+                            <th className="p-2 text-left font-semibold">Classes</th>
                             <th className="p-2 text-left font-semibold">Images</th>
                           </tr>
                         </thead>

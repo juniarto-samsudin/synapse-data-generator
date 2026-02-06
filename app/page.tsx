@@ -71,7 +71,7 @@ export default function Home() {
           <code>{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
-      position: "bottom-right",
+      position: "top-center",
       classNames: {
         content: "flex flex-col gap-2",
       },
@@ -126,7 +126,7 @@ export default function Home() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-demo-scantype">
-                    Scan Type
+                    Dataset
                   </FieldLabel>
                   <Select
                     value={field.value}
@@ -160,7 +160,7 @@ export default function Home() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-demo-ipc">
-                    IPC
+                    IPC [Images Per Class]
                   </FieldLabel>
                   <Input
                     {...field}
@@ -183,7 +183,11 @@ export default function Home() {
       </CardContent>
       <CardFooter>
         <Field orientation="horizontal">
-          <Button type="button" variant="outline" onClick={() => form.reset()}>
+          <Button type="button" variant="outline" onClick={() => {
+            form.reset()
+            setSubmitOK(null)
+            setOutputSubdir(null)
+            }}>
             Reset
           </Button>
           <Button type="submit" form="form-rhf-demo">
