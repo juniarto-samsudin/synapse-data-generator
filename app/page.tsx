@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -37,6 +38,8 @@ import {
   InputGroupTextarea,
 } from "@/components/ui/input-group"
 
+import View from "@/components/custom/view"
+
 const formSchema = z.object({
   scanType: z.string().min(1, "Please select a scan type."),
   ipc: z
@@ -50,6 +53,8 @@ const formSchema = z.object({
 })
 
 export default function Home() {
+  const [submitOK, setSubmitOK] = useState<boolean | null>(null)
+  const [outputSubdir, setOutputSubdir] = useState<string | null>(null)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -87,6 +92,15 @@ export default function Home() {
       })
       const payload = await res.json()
       console.log('Response:', payload)
+      if(res.ok){
+        setSubmitOK(true)
+        setOutputSubdir(payload.outputSubdir || null)
+        toast.success(`Run submitted successfully! Run ID: ${payload.runId}`)
+      } else {
+        setSubmitOK(false)
+        setOutputSubdir(null)
+        toast.error(`Error submitting run: ${payload.error || 'Unknown error'}`)
+      }
     }
     catch(err){
       console.error('Error submitting form:', err)
@@ -94,8 +108,9 @@ export default function Home() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
-      <Card className="w-full sm:max-w-md">
+    <div className="flex flex-col gap-4">
+    <div className="w-full px-4 pt-4">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>Data Generation</CardTitle>
           <CardDescription>
@@ -104,7 +119,7 @@ export default function Home() {
         </CardHeader>
       <CardContent>
         <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
-          <FieldGroup>
+          <FieldGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Controller
               name="scanType"
               control={form.control}
@@ -125,7 +140,7 @@ export default function Home() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="OCT">OCT</SelectItem>
-                      <SelectItem value="Kidney Scan">Kidney Scan</SelectItem>
+                      <SelectItem value="Kidney">Kidney</SelectItem>
                       <SelectItem value="FUNDUS">FUNDUS</SelectItem>
                       <SelectItem value="UpperGI">UpperGI</SelectItem>
                       <SelectItem value="ISIC">ISIC</SelectItem>
@@ -177,6 +192,8 @@ export default function Home() {
         </Field>
       </CardFooter>
     </Card>
+    </div>
+    <View submitOK={submitOK} outputSubdir={outputSubdir} />
     </div>
   )
 }

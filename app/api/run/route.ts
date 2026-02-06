@@ -13,7 +13,7 @@ const myOutDir: Record<string, string> = {
   FUNDUS: "Synthetic_FUNDUS_Images",
   ISIC: "Synthetic_ISIC_Images",
   COVID: "Synthetic_COVID_Images",
-  KidneyScan: "Synthetic_KidneyScan_Images",
+  Kidney: "Synthetic_Kidney_Images",
   Alzhiemer: "Synthetic_Alzhiemer_Images",
 };
 
