@@ -58,7 +58,7 @@ export default function Home() {
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     console.log("Form submitted:", data)
     toast("You submitted the following values:", {
       description: (
@@ -74,6 +74,23 @@ export default function Home() {
         "--border-radius": "calc(var(--radius)  + 4px)",
       } as React.CSSProperties,
     })
+    try{
+      const res = await fetch('/api/run', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          dataset: data.scanType,
+          ipc: data.ipc,
+        }),
+      })
+      const payload = await res.json()
+      console.log('Response:', payload)
+    }
+    catch(err){
+      console.error('Error submitting form:', err)
+    }
   }
 
   return (
@@ -112,7 +129,7 @@ export default function Home() {
                       <SelectItem value="FUNDUS">FUNDUS</SelectItem>
                       <SelectItem value="UpperGI">UpperGI</SelectItem>
                       <SelectItem value="ISIC">ISIC</SelectItem>
-                      <SelectItem value="Alzheimer">Alzheimer</SelectItem>
+                      <SelectItem value="Alzhiemer">Alzhiemer</SelectItem>
                       <SelectItem value="COVID">COVID</SelectItem>
                     </SelectContent>
                   </Select>
