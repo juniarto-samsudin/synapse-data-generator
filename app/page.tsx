@@ -112,7 +112,7 @@ export default function Home() {
     <div className="w-full px-4 pt-4">
       <Card className="w-full">
         <CardHeader>
-          <CardTitle>Synthetic Data Generation</CardTitle>
+          <CardTitle>Synthetic Data Generator</CardTitle>
           <CardDescription>
             Generate Synthetic Data for Your Application with ease
           </CardDescription>
