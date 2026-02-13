@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
 import { toast } from "sonner"
 import * as z from "zod"
+import Image from "next/image"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -111,15 +112,27 @@ export default function Home() {
     <div className="flex flex-col gap-4">
     <div className="w-full px-4 pt-4">
       <Card className="w-full">
-        <CardHeader>
-          <CardTitle>Synthetic Data Generator</CardTitle>
-          <CardDescription>
-            Generate Synthetic Data for Your Application with ease
-          </CardDescription>
+        <CardHeader className="relative pb-0">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <CardTitle>Synthetic Data Generator</CardTitle>
+              <CardDescription>
+                Generate Synthetic Data for Your Application with ease
+              </CardDescription>
+            </div>
+            <Image
+              src="/IHPC.png"
+              alt="IHPC"
+              width={640}
+              height={740}
+              className="h-30 w-70 object-contain"
+              priority
+            />
+          </div>
         </CardHeader>
-      <CardContent>
+      <CardContent className="pt-0">
         <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
-          <FieldGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <FieldGroup className="grid w-[80%] grid-cols-1 gap-4 sm:grid-cols-2">
             <Controller
               name="scanType"
               control={form.control}
@@ -139,13 +152,8 @@ export default function Home() {
                       <SelectValue placeholder="Select a scan type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="OCT">OCT</SelectItem>
-                      <SelectItem value="Kidney">Kidney</SelectItem>
-                      <SelectItem value="FUNDUS">FUNDUS</SelectItem>
-                      <SelectItem value="UpperGI">UpperGI</SelectItem>
-                      <SelectItem value="ISIC">ISIC</SelectItem>
                       <SelectItem value="Alzhiemer">Alzhiemer</SelectItem>
-                      <SelectItem value="COVID">COVID</SelectItem>
+                      <SelectItem value="COVID">Covid</SelectItem>
                     </SelectContent>
                   </Select>
                   {fieldState.invalid && (
@@ -201,4 +209,3 @@ export default function Home() {
     </div>
   )
 }
-
